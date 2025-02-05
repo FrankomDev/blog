@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Artifika';
+    src: url('./Artifika/Artifika-Regular.ttf'); 
+}
+
+.headerBtn{
+    font-size: medium;
+    text-decoration-line: underline;
+    border-radius: 30%;
+    font-family: 'Artifika';
+}
+
+.login{
+    font-size: large;
+}
+
+body{
+    background-color: #3a3b3c;
+}
+
+h1, h2, h3{
+    color: white;
+    font-family: 'Artifika';
+}
+
+.name{
+    font-size: 300%;
+}
+
+.title{
+    font-size: 250%;
+}
