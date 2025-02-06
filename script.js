@@ -6,6 +6,10 @@ for (let i=1; i<posts_list+1; i++) {
     readName(i,1).then(name => {
         h1.textContent = name;
     });
+    h1.onclick = function () {
+        window.location.href= "./post.html?blog="+i;
+    };
+    h1.style.cursor = "pointer";
     document.getElementById('container').appendChild(h1);
     let h3 = document.createElement('h3')
     readName(i,2).then(desc => {

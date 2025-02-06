@@ -7,7 +7,6 @@ const dateElement = document.getElementById('date');
 const containsElement = document.getElementById('contains');
 
 if (blogValue) {
-    console.log(titleElement)
     readJson(blogValue,1).then(name => {
         titleElement.innerText = name;
     });
