@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Artifika';
-    src: url('./Artifika/Artifika-Regular.ttf'); 
+    src: url('/static/Artifika/Artifika-Regular.ttf') format('truetype');  
 }
 
 .headerBtn{

@@ -7,7 +7,7 @@ for (let i=1; i<posts_list+1; i++) {
         h1.textContent = name;
     });
     h1.onclick = function () {
-        window.location.href= "./post.html?blog="+i;
+        window.location.href= "./post?blog="+i;
     };
     h1.style.cursor = "pointer";
     document.getElementById('container').appendChild(h1);
@@ -22,7 +22,7 @@ for (let i=1; i<posts_list+1; i++) {
 }
 
 function readName(number, thingToGet) {
-    return fetch('./posts/' + number + '.json')
+    return fetch('/static/posts/' + number + '.json')
         .then(response => response.json()) 
         .then(data => {
             if (thingToGet == 1){

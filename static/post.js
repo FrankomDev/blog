@@ -25,7 +25,7 @@ if (blogValue) {
 
 
 function readJson(number, thingToGet) {
-    return fetch('./posts/' + number + '.json')
+    return fetch('/static/posts/' + number + '.json')
         .then(response => response.json()) 
         .then(data => {
             if (thingToGet == 1){
