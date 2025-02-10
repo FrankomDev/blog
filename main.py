@@ -1,4 +1,16 @@
 from flask import Flask, render_template, request, redirect
+import sqlite3
+
+def getDB():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM password")
+    rows = cursor.fetchall() 
+    for row in rows:
+        passwd = row[0]
+    conn.close()
+    return passwd
+
 
 app = Flask(__name__)
 
@@ -17,7 +29,7 @@ def login():
 @app.route('/submit', methods=['POST'])
 def submit():
     password_input = request.form['password_input']
-    if password_input == '123':
+    if password_input == str(getDB()):
         return 'good!'
     else:
         return redirect('/login?error=1', code=302)
