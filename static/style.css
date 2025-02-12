@@ -30,3 +30,18 @@ h1, h2, h3{
 .title{
     font-size: 250%;
 }
+
+#wrongpass{
+    background-color: red;
+    width: 25%;
+    border-radius: 10px;
+    display: none;
+}
+
+.adminContent{
+    font-size: large;
+}
+
+#isHidden{
+    opacity: 0%;
+}

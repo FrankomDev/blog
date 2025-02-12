@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="{{ url_for('static', filename='login.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +19,10 @@
             <input type="password" id="password_input" name="password_input"> <p>‎</p>
             <button class="login">Login</button>
         </form>
+        <div id="wrongpass">
+            <h2>Wrong Password!</h2>
+        </div>
     </center>
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
 </body>
 </html>

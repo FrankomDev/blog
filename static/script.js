@@ -1,4 +1,5 @@
-posts_list = 3
+getNum = document.getElementById('isHidden').innerText;
+posts_list = parseFloat(getNum);
 
 for (let i=1; i<posts_list+1; i++) {
     console.log(i);
