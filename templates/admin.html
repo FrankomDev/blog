@@ -9,17 +9,19 @@
 <body>
     <center>
         <h1>Admin Panel</h1>
-        <h2>Post number: {{number}}</h2>
-        <h3>Title:</h3>
-        <input>
-        <h3>Description:</h3>
-        <input>
-        <h3>Date:</h3>
-        <input>
-        <h3>Content:</h3>
-        <textarea rows="10" cols="100" class="adminContent"></textarea><p></p>
-        <button class="login">Post!</button>
+        <form action="/publish" method="POST">
+            <h3>Title:</h3>
+            <input id="title_input" name="title_input" autocomplete="off">
+            <h3>Description:</h3>
+            <input id="description_input" name="description_input" autocomplete="off">
+            <h3>Date:</h3>
+            <input id="date_input" name="date_input" autocomplete="off">
+            <h3>Content:</h3>
+            <textarea rows="10" cols="100" class="adminContent" name="content_input" id="content_input" autocomplete="off"></textarea><p></p>
+            <button class="login">Post!</button>
+        </form>
     </center>
     <img src="{{ url_for('static', filename='images/miku.gif') }}" align="right" id="miku">
+    <h2>Post number:</h2> <h2>{{number}}</h2>
 </body>
 </html>
