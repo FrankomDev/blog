@@ -5,5 +5,6 @@ I wanted to create something myself and learn more about JavaScript (yes i know 
 I like simple look of writefreely and wanted to do something similar.
 
 **TODO:**
-- login page
-- admin page
+- admin page upgrade
+- post deleting
+- post modifying

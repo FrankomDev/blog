@@ -4,6 +4,13 @@ import hashlib
 import os
 import json
 
+def checkPostsDir():
+    if os.path.isdir('./static/posts'):
+        print('directory exists')
+    else:
+        os.makedirs('./static/posts')
+        print('directory has been created')
+
 def getDB():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -55,13 +62,19 @@ def submit():
    
 @app.route('/publish', methods=['POST']) 
 def publish():
-    title_input = request.form['title_input']
-    description_input = request.form['description_input']
-    date_input = request.form['date_input']
-    content_input = request.form['content_input']
-    saveJSON(title_input, description_input, date_input, content_input)
-    return redirect('/post?blog='+str(countFiles()), code=302)
+    password_confirm = request.form['password_input']
+    hash = hashlib.sha256(password_confirm.encode('utf8')).hexdigest()
+    if hash == str(getDB()):
+        title_input = request.form['title_input']
+        description_input = request.form['description_input']
+        date_input = request.form['date_input']
+        content_input = request.form['content_input']
+        saveJSON(title_input, description_input, date_input, content_input)
+        return redirect('/post?blog='+str(countFiles()), code=302)
+    else:
+        return 'wrong pass'
 
 if __name__ == '__main__':
+    checkPostsDir()
     app.run(debug=True)
 
