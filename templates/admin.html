@@ -26,6 +26,19 @@
     <img src="{{ url_for('static', filename='images/miku.gif') }}" align="right" id="miku">
     <h2>Post number:</h2> <h2>{{number}}</h2>
     <h2>‎</h2>
-    <button class="login">All posts</button>
+    <a href="#scroll">
+        <button class="login">All posts</button>
+    </a>
+    <div>
+        <center>
+            <h1 id="scroll">List of all posts</h1>
+            <h2 id="isHidden">{{number2}}</h2>
+            <hr width="20%" size="2">
+            <div id="container">
+    
+            </div>
+        </center>
+    </div>
+    <script src="{{ url_for('static', filename='posts.js') }}"></script>
 </body>
 </html>

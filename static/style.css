@@ -49,3 +49,8 @@ h1, h2, h3{
 #miku{
     margin-top: -30%;
 }
+
+#line{
+    width: 20%;
+    size: 2;
+}

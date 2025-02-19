@@ -56,7 +56,7 @@ def submit():
     password_input = request.form['password_input']
     hash = hashlib.sha256(password_input.encode('utf8')).hexdigest()
     if hash == str(getDB()):
-        return render_template('admin.html', number=countFiles()+1)
+        return render_template('admin.html', number=countFiles()+1, number2=countFiles())
     else:
         return redirect('/login?error=1', code=302)
    
