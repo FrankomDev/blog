@@ -37,6 +37,17 @@ def saveJSON(name,description,date,contains):
     with open(filename, "w") as outfile:
         json.dump(dictionary, outfile)
 
+def editJSON(name,description,date,contains, file):
+    dictionary = {
+        "name": name,
+        "description": description,
+        "date": date,
+        "contains": contains 
+    }
+    filename = './static/posts/'+str(file)+'.json'
+    with open(filename, "w") as outfile:
+        json.dump(dictionary, outfile)
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -73,6 +84,26 @@ def publish():
         return redirect('/post?blog='+str(countFiles()), code=302)
     else:
         return 'wrong pass'
+
+@app.route('/edit')
+def edit():
+    return render_template('edit.html')
+
+@app.route('/editPost', methods=['POST'])
+def editPost():
+    password_confirm = request.form['password_input']
+    hash = hashlib.sha256(password_confirm.encode('utf8')).hexdigest()
+    if hash == str(getDB()):
+        title_input = request.form['title_input']
+        description_input = request.form['description_input']
+        date_input = request.form['date_input']
+        content_input = request.form['content_input']
+        file = request.form['getNum']
+        editJSON(title_input, description_input, date_input, content_input, file)
+        return redirect('/post?blog='+str(file), code=302)
+    else:
+        return 'wrong pass'
+
 
 if __name__ == '__main__':
     checkPostsDir()

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <center>
+        <h1>Edit Panel</h1>
+        <form action="/editPost" method="POST">
+            <h3>Title:</h3>
+            <input id="title_input" name="title_input" autocomplete="off">
+            <h3>Description:</h3>
+            <input id="description_input" name="description_input" autocomplete="off">
+            <h3>Date:</h3>
+            <input id="date_input" name="date_input" autocomplete="off">
+            <h3>Content:</h3>
+            <textarea rows="10" cols="100" class="adminContent" name="content_input" id="content_input" autocomplete="off"></textarea><p></p>
+            <h3>Password confirm:</h3>
+            <input id="password_input" name="password_input" autocomplete="off" type="password">
+            <button class="login">Edit</button>
+            <input id="getNum" name="getNum" readonly>
+        </form>
+    </center>
+    <script src="{{ url_for('static', filename='edit.js') }}"></script>
+</body>
+</html>

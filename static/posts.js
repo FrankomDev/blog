@@ -11,10 +11,13 @@ for (let i=1; i<posts_list+1; i++) {
         h2title.textContent = name;
     });
     document.getElementById('container').appendChild(h2title);
+    let ahref = document.createElement('a');
+    ahref.href = '/edit?blog='+i;
+    document.getElementById('container').appendChild(ahref);
     let button = document.createElement('button');
     button.className = 'login';
     button.textContent = 'Edit';
-    document.getElementById('container').appendChild(button);
+    ahref.appendChild(button);
     let line = document.createElement('hr');
     line.id = 'line'
     document.getElementById('container').appendChild(line);
