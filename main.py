@@ -3,6 +3,7 @@ import sqlite3
 import hashlib
 import os
 import json
+import mysql.connector
 
 def checkPostsDir():
     if os.path.isdir('./static/posts'):
@@ -12,7 +13,13 @@ def checkPostsDir():
         print('directory has been created')
 
 def getDB():
-    conn = sqlite3.connect('database.db')
+    #conn = sqlite3.connect('database.db')
+    conn = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    password = "123",
+    database = "blog"
+    )
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM password")
     rows = cursor.fetchall() 
