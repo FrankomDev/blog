@@ -1,13 +1,13 @@
 @font-face {
-    font-family: 'Artifika';
-    src: url('/static/Artifika/Artifika-Regular.ttf') format('truetype');  
+    font-family: 'Garamond';
+    src: url('/static/Garamond/EBGaramond-Bold.ttf') format('truetype');  
 }
 
 .headerBtn{
     font-size: medium;
     text-decoration-line: underline;
     border-radius: 30%;
-    font-family: 'Artifika';
+    font-family: 'Garamond';
 }
 
 .login{
@@ -20,7 +20,7 @@ body{
 
 h1, h2, h3{
     color: white;
-    font-family: 'Artifika';
+    font-family: 'Garamond';
 }
 
 .name{
@@ -53,4 +53,12 @@ h1, h2, h3{
 #line{
     width: 20%;
     size: 2;
+}
+
+#contains{
+    max-width: 60%;
+}
+
+#hide{
+    float: right;
 }

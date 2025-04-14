@@ -34,3 +34,8 @@ function readName(number) {
             return null; 
         });
 }
+
+function hideMiku() {
+    miku = document.getElementById('miku');
+    miku.id = 'isHidden';
+}
