@@ -3,32 +3,16 @@
     src: url('/static/Garamond/EBGaramond-Bold.ttf') format('truetype');  
 }
 
-.headerBtn{
-    font-size: medium;
-    text-decoration-line: underline;
-    border-radius: 30%;
-    font-family: 'Garamond';
-}
-
-.login{
-    font-size: large;
-}
-
 body{
     background-color: #3a3b3c;
 }
 
-h1, h2, h3{
-    color: white;
+.h1,.h2,.h3,.h4,.h5,.h6{
     font-family: 'Garamond';
 }
 
-.name{
-    font-size: 300%;
-}
-
-.title{
-    font-size: 250%;
+#isHidden{
+    opacity: 0%;
 }
 
 #wrongpass{
@@ -36,29 +20,5 @@ h1, h2, h3{
     width: 25%;
     border-radius: 10px;
     display: none;
-}
-
-.adminContent{
-    font-size: large;
-}
-
-#isHidden{
-    opacity: 0%;
-}
-
-#miku{
-    margin-top: -30%;
-}
-
-#line{
-    width: 20%;
-    size: 2;
-}
-
-#contains{
-    max-width: 60%;
-}
-
-#hide{
-    float: right;
+    margin: auto;
 }
