@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +10,22 @@
 </head>
 <body>
     <a href="./">
-        <button class="headerBtn">Go back</button>
+        <button type="button" class="btn btn-light text-decoration-underline fw-bold btn-sm" style="font-family: Garamond;">Go back</button>
     </a>
-    <center>
-        <h1>Admin Panel Login</h1>
-        <hr width="30%" size="2">
-        <h2>‎</h2>
+        <p class="h1 text-center text-light">Admin Panel Login</p>
+        <hr width="30%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
+        <br>
         <form action="/submit" method="POST">
-            <h2>Admin Password</h2>
-            <input type="password" id="password_input" name="password_input"> <p>‎</p>
-            <button class="login">Login</button>
+            <p class="h2 text-center text-light">Admin Password</p>
+            <div class="text-center">
+                <input type="password" id="password_input" name="password_input"> <br><br>
+                <button type="password" id="password_input" name="password_input" class="btn btn-light" style="font-family: Garamond;">Login</button>
+            </div>
         </form>
+        <br>
         <div id="wrongpass">
-            <h2>Wrong Password!</h2>
+            <p class="h2 text-center text-light">Wrong Password!</p>
         </div>
-    </center>
     <script src="{{ url_for('static', filename='login.js') }}"></script>
 </body>
 </html>

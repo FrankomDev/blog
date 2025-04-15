@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <a href="./login">
-            <button class="headerBtn">Login</button>
-        </a>
-        <center>
-            <h1 class="name">Frankom's basement</h1>
-            <hr width="40%" size="2">
-            <h3 id="isHidden">{{number}}</h3>
-            <div id="container">
-            <script src="{{ url_for('static', filename='script.js') }}"></script>
-            </div>
-        </center>
-    </header>
+    <a href="./login">
+        <button type="button" class="btn btn-light text-decoration-underline fw-bold btn-sm" style="font-family: Garamond;">Login</button>
+    </a>
+        <p class="text-center text-light" style="font-size: 300%; font-family: Garamond;">Frankom's basement</p>
+    <hr width="40%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
+    <p class="h3" id="isHidden">{{number}}</p>
+    <div id="container">
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+    </div>
 </body>
 </html>

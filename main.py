@@ -114,5 +114,5 @@ def editPost():
 
 if __name__ == '__main__':
     checkPostsDir()
-    app.run(debug=True)
+    app.run(debug=False)
 

@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <a href="./">
-        <button class="headerBtn">Go back</button>
+        <button type="button" class="btn btn-light text-decoration-underline fw-bold btn-sm" style="font-family: Garamond;">Go back</button>
     </a>
-    <center>
-        <h1 class="title" id="title"></h1>
-        <h2 id="description"></h2>
-        <h3 id="date"></h3>
-        <hr width="40%" size="2">
-        <h3>‎</h3>
-        <h3 id="contains"></h3>
-    </center>
-    <script src="{{ url_for('static', filename='post.js') }}"></script>
+        <p id="title" class="text-center text-light" style="font-size: 250%; font-family: Garamond;"></p>
+        <p id="description" class="h2 text-center text-light"></p>
+        <p id="date" class="h3 text-center text-light"></p>
+        <hr width="40%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
+        <br>
+        <br>
+        <div class="container">
+            <p id="contains" class="h4 text-center text-light"></p>
+        </div>
+        <script src="{{ url_for('static', filename='post.js') }}"></script>
 </body>
 </html>
