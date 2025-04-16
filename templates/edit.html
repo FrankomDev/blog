@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
 </head>
 <body>
-    <center>
-        <h1>Edit Panel</h1>
+    <div class="text-center">
+        <p class="h1 text-light">Edit Panel</p>
         <form action="/editPost" method="POST">
-            <h3>Title:</h3>
+            <p class="h3 text-light">Title:</p>
             <input id="title_input" name="title_input" autocomplete="off">
-            <h3>Description:</h3>
+            <p class="h3 text-light">Description:</p>
             <input id="description_input" name="description_input" autocomplete="off">
-            <h3>Date:</h3>
+            <p class="h3 text-light">Date:</p>
             <input id="date_input" name="date_input" autocomplete="off">
-            <h3>Content:</h3>
+            <p class="h3 text-light">Content:</p>
             <textarea rows="10" cols="100" class="adminContent" name="content_input" id="content_input" autocomplete="off"></textarea><p></p>
-            <h3>Password confirm:</h3>
+            <p class="h3 text-light">Password confirm:</p>
             <input id="password_input" name="password_input" autocomplete="off" type="password">
             <button class="login">Edit</button>
             <input id="getNum" name="getNum" readonly>
         </form>
-    </center>
+    </div>
     <script src="{{ url_for('static', filename='edit.js') }}"></script>
 </body>
 </html>

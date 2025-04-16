@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +11,36 @@
 <body>
     <button class="login" id="hide" onclick="hideMiku()">Hide Miku</button>
     <br>
-    <center>
-        <h1>Admin Panel</h1>
+    <img src="{{ url_for('static', filename='images/miku.gif') }}" id="miku" style="position: absolute;">
+    <div class="text-center">
+        <p class="h1 text-light">Admin Panel</p>
+        <br>
         <form action="/publish" method="POST">
-            <h3>Title:</h3>
+            <p class="h3 text-light">Title:</p>
             <input id="title_input" name="title_input" autocomplete="off">
-            <h3>Description:</h3>
+            <p class="h3 text-light">Description:</p>
             <input id="description_input" name="description_input" autocomplete="off">
-            <h3>Date:</h3>
+            <p class="h3 text-light">Date:</p>
             <input id="date_input" name="date_input" autocomplete="off">
-            <h3>Content:</h3>
+            <p class="h3 text-light">Content:</p>
             <textarea rows="10" cols="100" class="adminContent" name="content_input" id="content_input" autocomplete="off"></textarea><p></p>
-            <h3>Password confirm:</h3>
+            <p class="h3 text-light">Password confirm:</p>
             <input id="password_input" name="password_input" autocomplete="off" type="password">
             <button class="login">Post!</button>
         </form>
-    </center>
-    <img src="{{ url_for('static', filename='images/miku.gif') }}" align="right" id="miku">
-    <h2>Post number:</h2> <h2>{{number}}</h2>
-    <h2>‎</h2>
+    </div>
+    <div class="d-flex">
+    <p class="h2 text-light">Post number:</p> <p class="isHidden">lll</p> <p class="h2 text-light">{{number}}</p> </div>
+    <br>
     <a href="#scroll">
         <button class="login">All posts</button>
     </a>
-    <div>
-        <center>
-            <h1 id="scroll">List of all posts</h1>
-            <h2 id="isHidden">{{number2}}</h2>
-            <hr width="20%" size="2">
-            <div id="container">
-    
-            </div>
-        </center>
+    <div class="text-center">
+        <p class="h1 text-light" id="scroll">List of all posts</p>
+        <p class="h2 text-light" id="isHidden">{{number2}}</p>
+        <hr width="20%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
+        <div id="container">
+        </div>
     </div>
     <script src="{{ url_for('static', filename='posts.js') }}"></script>
 </body>

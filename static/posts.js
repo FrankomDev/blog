@@ -1,12 +1,15 @@
 getNum = document.getElementById('isHidden').innerText;
 posts_list = parseFloat(getNum);
+mikuHidden = false;
 
 for (let i=1; i<posts_list+1; i++) {
     console.log(i);
-    let filename = document.createElement('h2');
+    let filename = document.createElement('p');
+    filename.className = 'h2 text-light';
     filename.textContent = i+'.json';
     document.getElementById('container').appendChild(filename);
-    let h2title = document.createElement('h2');
+    let h2title = document.createElement('p');
+    h2title.className = 'h2 text-light';
     readName(i,1).then(name => {
         h2title.textContent = name;
     });
@@ -19,7 +22,7 @@ for (let i=1; i<posts_list+1; i++) {
     button.textContent = 'Edit';
     ahref.appendChild(button);
     let line = document.createElement('hr');
-    line.id = 'line'
+    line.style = 'width: 20%; height: 2px; background-color: white; border: none; opacity: 1; margin: auto;';
     document.getElementById('container').appendChild(line);
 }
 
@@ -36,6 +39,18 @@ function readName(number) {
 }
 
 function hideMiku() {
-    miku = document.getElementById('miku');
-    miku.id = 'isHidden';
+    if(mikuHidden==false){
+        btn = document.getElementById('hide');
+        miku = document.getElementById('miku');
+        miku.className = 'isHidden';
+        mikuHidden = true;
+        btn.textContent = 'Show Miku'
+    }else{
+        btn = document.getElementById('hide');
+        miku = document.getElementById('miku');
+        miku.className = 'isVisible';
+        mikuHidden = false;
+        btn.textContent = 'Hide Miku'
+    }
+    
 }
