@@ -18,9 +18,14 @@ for (let i=1; i<posts_list+1; i++) {
     ahref.href = '/edit?blog='+i;
     document.getElementById('container').appendChild(ahref);
     let button = document.createElement('button');
-    button.className = 'login';
     button.textContent = 'Edit';
     ahref.appendChild(button);
+
+    let delBtn = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.onclick = function() { confirmDel(i); };
+    document.getElementById('container').appendChild(delBtn);
+    
     let line = document.createElement('hr');
     line.style = 'width: 20%; height: 2px; background-color: white; border: none; opacity: 1; margin: auto;';
     document.getElementById('container').appendChild(line);
@@ -53,4 +58,35 @@ function hideMiku() {
         btn.textContent = 'Hide Miku'
     }
     
+}
+
+//function confirmDel(file) {
+ //   if (confirm('Are you sure you want to delete '+file+'?')){
+   //     console.log('zaakceptowane');
+   // }else {
+     //   console.log('odrzucone');
+    //}
+//}
+
+function confirmDel(file) {
+    let popup = prompt('Are you sure you want to delete '+file+'.json?', 'Password');
+    if (popup != null){
+        fetch('./delPost', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              postFile: file,
+              passwd: popup
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+    }
 }

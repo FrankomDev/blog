@@ -1,7 +1,7 @@
 getNum = document.getElementById('isHidden').innerText;
 posts_list = parseFloat(getNum);
 
-for (let i=1; i<posts_list+1; i++) {
+for (let i=posts_list; i>0; i--) {
     console.log(i);
     let h1 = document.createElement('p');
     readName(i,1).then(name => {

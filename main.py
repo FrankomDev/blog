@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 #import sqlite3
 import hashlib
 import os
@@ -54,6 +54,15 @@ def editJSON(name,description,date,contains, file):
     filename = './static/posts/'+str(file)+'.json'
     with open(filename, "w") as outfile:
         json.dump(dictionary, outfile)
+    
+def deleteJSON(file):
+    filename = './static/posts/'+str(file)+'.json'
+    os.remove(filename)
+    i = file
+    postsPath = './static/posts/'
+    while i <= countFiles():
+        i+=1
+        os.rename(postsPath+str(i)+'.json', postsPath+str(i-1)+'.json')
 
 app = Flask(__name__)
 
@@ -111,6 +120,17 @@ def editPost():
     else:
         return 'wrong pass'
 
+@app.route('/delPost', methods=['POST'])
+def delPost():
+    data = request.get_json()
+    fileToDel = data.get('postFile')
+    passwdCheck = data.get('passwd')
+    hash = hashlib.sha256(passwdCheck.encode('utf8')).hexdigest()
+    if hash == str(getDB()):
+        deleteJSON(fileToDel)
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False})
 
 if __name__ == '__main__':
     checkPostsDir()
