@@ -1,2 +1,4 @@
 /static/posts/*
 /venv/
+/env.py
+/__pycache__/

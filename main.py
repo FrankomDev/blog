@@ -4,6 +4,7 @@ import hashlib
 import os
 import json
 import mysql.connector
+import env as env
 
 def checkPostsDir():
     if os.path.isdir('./static/posts'):
@@ -15,10 +16,10 @@ def checkPostsDir():
 def getDB():
     #conn = sqlite3.connect('database.db')
     conn = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "123",
-    database = "blog"
+    host = env.host,
+    user = env.user,
+    password = env.password,
+    database = env.database
     )
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM password")

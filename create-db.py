@@ -1,16 +1,17 @@
 #import sqlite3
 import hashlib
 import mysql.connector
+import env as env
 
 password = 'test123'
 hash = hashlib.sha256(password.encode('utf8')).hexdigest()
 
 #conn = sqlite3.connect("database.db")
 conn = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "123",
-    database = "blog"
+    host = env.host,
+    user = env.user,
+    password = env.password,
+    database = env.database
 )
 cursor = conn.cursor()
 
