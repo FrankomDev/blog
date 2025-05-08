@@ -135,5 +135,5 @@ def delPost():
 
 if __name__ == '__main__':
     checkPostsDir()
-    app.run(debug=False)
+    app.run(debug=env.debug)
 

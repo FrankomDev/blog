@@ -17,7 +17,7 @@ if (blogValue) {
         dateElement.innerText = name;
     });
     readJson(blogValue,4).then(name => {
-        containsElement.innerText = name;
+        containsElement.innerHTML = marked.parse(name);
     });
 }else {
     console.log('no value')
