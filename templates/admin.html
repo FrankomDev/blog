@@ -51,7 +51,9 @@
         <hr width="20%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
         <br>
         <div class="bg-light container" id="scroll2">
-            <p class="h3">{{logs}}</p>
+            {% for line in logs %}
+            <p class="h3">{{line}}</p>
+            {% endfor %}
         </div>
     </div>
     <script src="{{ url_for('static', filename='posts.js') }}"></script>

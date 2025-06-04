@@ -3,7 +3,7 @@ import hashlib
 import mysql.connector
 import env as env
 
-password = 'test123'
+password = env.panel_password
 hash = hashlib.sha256(password.encode('utf8')).hexdigest()
 
 #conn = sqlite3.connect("database.db")

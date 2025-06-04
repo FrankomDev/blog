@@ -5,6 +5,7 @@ import os
 import json
 import mysql.connector
 import env as env
+from datetime import datetime
 
 def checkPostsDir():
     if os.path.isdir('./static/posts'):
@@ -65,12 +66,14 @@ def deleteJSON(file):
         i+=1
         os.rename(postsPath+str(i)+'.json', postsPath+str(i-1)+'.json')
 
-def createLogs(password,host,valid):
+def createLogs(password,host,valid,where):
+    time = datetime.now().strftime("%d.%m.%y %X")
     with open ('log', 'a') as file:
-        if valid == False:
-            file.write('⚠️ '+'host: '+host+' pass: '+password+"\n")
-        elif valid:
-            file.write('✅ '+'host: '+host+"\n")
+        if where == 'panel':
+            if valid == False:
+                file.write('⚠️ Panel login, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
+            elif valid:
+                file.write('✅ Panel login, '+'host: '+host+', time: '+time+"\n")
 
 app = Flask(__name__)
 
@@ -91,11 +94,11 @@ def submit():
     password_input = request.form['password_input']
     hash = hashlib.sha256(password_input.encode('utf8')).hexdigest()
     if hash == str(getDB()):
-        createLogs(password_input,request.remote_addr,True)
+        createLogs(password_input,request.remote_addr,True,'panel')
         file = open('log')
-        return render_template('admin.html', number=countFiles()+1, number2=countFiles(), logs=file.read())
+        return render_template('admin.html', number=countFiles()+1, number2=countFiles(), logs=file.readlines())
     else:
-        createLogs(password_input,request.remote_addr,False)
+        createLogs(password_input,request.remote_addr,False,'panel')
         return redirect('/login?error=1', code=302)
    
 @app.route('/publish', methods=['POST']) 
@@ -108,8 +111,10 @@ def publish():
         date_input = request.form['date_input']
         content_input = request.form['content_input']
         saveJSON(title_input, description_input, date_input, content_input)
+        createLogs(password_confirm,request.remote_addr,True,'publish')
         return redirect('/post?blog='+str(countFiles()), code=302)
     else:
+        createLogs(password_confirm,request.remote_addr,False,'publish')
         return 'wrong pass'
 
 @app.route('/edit')
@@ -127,8 +132,10 @@ def editPost():
         content_input = request.form['content_input']
         file = request.form['getNum']
         editJSON(title_input, description_input, date_input, content_input, file)
+        createLogs(password_confirm,request.remote_addr,True,'edit')
         return redirect('/post?blog='+str(file), code=302)
     else:
+        createLogs(password_confirm,request.remote_addr,False,'edit')
         return 'wrong pass'
 
 @app.route('/delPost', methods=['POST'])
@@ -139,8 +146,10 @@ def delPost():
     hash = hashlib.sha256(passwdCheck.encode('utf8')).hexdigest()
     if hash == str(getDB()):
         deleteJSON(fileToDel)
+        createLogs(passwdCheck,request.remote_addr,True,'delete')
         return jsonify({"success": True})
     else:
+        createLogs(passwdCheck,request.remote_addr,False,'delete')
         return jsonify({"success": False})
 
 if __name__ == '__main__':
