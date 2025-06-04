@@ -32,14 +32,26 @@
     <div class="d-flex">
     <p class="h2 text-light">Post number:</p> <p class="isHidden">lll</p> <p class="h2 text-light">{{number}}</p> </div>
     <br>
-    <a href="#scroll">
+    <a href="#scroll" class="noLink">
         <button class="login">All posts</button>
+    </a>
+    <a href="#scroll2" class="noLink">
+        <button class="login">Logs</button>
     </a>
     <div class="text-center">
         <p class="h1 text-light" id="scroll">List of all posts</p>
         <p class="h2 text-light" id="isHidden">{{number2}}</p>
         <hr width="20%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
         <div id="container">
+        </div>
+    </div>
+    <br><br>
+    <div class="text-center">
+        <p class="h1 text-light">Logs</p>
+        <hr width="20%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
+        <br>
+        <div class="bg-light container" id="scroll2">
+            <p class="h3">{{logs}}</p>
         </div>
     </div>
     <script src="{{ url_for('static', filename='posts.js') }}"></script>

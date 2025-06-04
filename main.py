@@ -65,6 +65,13 @@ def deleteJSON(file):
         i+=1
         os.rename(postsPath+str(i)+'.json', postsPath+str(i-1)+'.json')
 
+def createLogs(password,host,valid):
+    with open ('log', 'a') as file:
+        if valid == False:
+            file.write('⚠️ '+'host: '+host+' pass: '+password+"\n")
+        elif valid:
+            file.write('✅ '+'host: '+host+"\n")
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -84,8 +91,11 @@ def submit():
     password_input = request.form['password_input']
     hash = hashlib.sha256(password_input.encode('utf8')).hexdigest()
     if hash == str(getDB()):
-        return render_template('admin.html', number=countFiles()+1, number2=countFiles())
+        createLogs(password_input,request.remote_addr,True)
+        file = open('log')
+        return render_template('admin.html', number=countFiles()+1, number2=countFiles(), logs=file.read())
     else:
+        createLogs(password_input,request.remote_addr,False)
         return redirect('/login?error=1', code=302)
    
 @app.route('/publish', methods=['POST']) 

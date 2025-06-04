@@ -31,3 +31,7 @@ body{
     display: none;
     margin: auto;
 }
+
+.noLink{
+    text-decoration: none !important;
+}
