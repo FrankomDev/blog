@@ -6,6 +6,7 @@ import json
 import mysql.connector
 import env as env
 from datetime import datetime
+import whitelist as whitelist
 
 def checkPostsDir():
     if os.path.isdir('./static/posts'):
@@ -66,29 +67,40 @@ def deleteJSON(file):
         i+=1
         os.rename(postsPath+str(i)+'.json', postsPath+str(i-1)+'.json')
 
+def checkWl(ip):
+    for line in whitelist.whitelist:
+        print(line)
+        if line == str(ip):
+            return True
+            break
+        elif line == 'end':
+            return False
+            break
+
 def createLogs(password,host,valid,where,fname):
     time = datetime.now().strftime("%d.%m.%y %X")
-    with open ('log', 'a') as file:
-        if where == 'panel':
-            if valid == False:
-                file.write('⚠️ Panel login, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
-            elif valid:
-                file.write('✅ Panel login, '+'host: '+host+', time: '+time+"\n")
-        elif where == 'publish':
-            if valid == False:
-                file.write('⚠️ Post publish, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
-            elif valid:
-                file.write('✅ Post publish, '+'host: '+host+', time: '+time+"\n")
-        elif where == 'edit':
-            if valid == False:
-                file.write('⚠️ Post edit, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
-            elif valid:
-                file.write('✅ Post edit '+str(fname)+'.json, host: '+host+', time: '+time+"\n")
-        elif where == 'delete':
-            if valid == False:
-                file.write('⚠️ Post delete '+str(fname)+'.json, host: '+host+', pass: '+password+', time: '+time+"\n")
-            elif valid:
-                file.write('✅ Post delete '+str(fname)+'.json, host: '+host+', time: '+time+"\n")  
+    if checkWl(host) == False:    
+        with open ('log', 'a') as file:
+            if where == 'panel':
+                if valid == False:
+                    file.write('⚠️ Panel login, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
+                elif valid:
+                    file.write('✅ Panel login, '+'host: '+host+', time: '+time+"\n")
+            elif where == 'publish':
+                if valid == False:
+                    file.write('⚠️ Post publish, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
+                elif valid:
+                    file.write('✅ Post publish, '+'host: '+host+', time: '+time+"\n")
+            elif where == 'edit':
+                if valid == False:
+                    file.write('⚠️ Post edit, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
+                elif valid:
+                    file.write('✅ Post edit '+str(fname)+'.json, host: '+host+', time: '+time+"\n")
+            elif where == 'delete':
+                if valid == False:
+                    file.write('⚠️ Post delete '+str(fname)+'.json, host: '+host+', pass: '+password+', time: '+time+"\n")
+                elif valid:
+                    file.write('✅ Post delete '+str(fname)+'.json, host: '+host+', time: '+time+"\n")  
 
 app = Flask(__name__)
 

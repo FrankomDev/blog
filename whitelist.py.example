@@ -1,0 +1,10 @@
+whitelist = ['192.168.1.1'
+,'10.10.10.10'
+,'127.0.0.1'
+,'192.168.167.194'
+,'172.16.1.30'
+,'51.77.61.38'
+,'end']
+
+# 'end' is required
+#cp whitelist.py.example whitelist.py
