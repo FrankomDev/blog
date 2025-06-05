@@ -50,10 +50,8 @@
         <p class="h1 text-light">Logs</p>
         <hr width="20%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
         <br>
-        <div class="bg-light container" id="scroll2">
-            {% for line in logs %}
-            <p class="h3">{{line}}</p>
-            {% endfor %}
+        <div class="container" id="scroll2">
+        <textarea disabled cols="90" rows="30" class="bg-light font-monospace h5">{{logs}}</textarea>
         </div>
     </div>
     <script src="{{ url_for('static', filename='posts.js') }}"></script>

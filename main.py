@@ -66,7 +66,7 @@ def deleteJSON(file):
         i+=1
         os.rename(postsPath+str(i)+'.json', postsPath+str(i-1)+'.json')
 
-def createLogs(password,host,valid,where):
+def createLogs(password,host,valid,where,fname):
     time = datetime.now().strftime("%d.%m.%y %X")
     with open ('log', 'a') as file:
         if where == 'panel':
@@ -74,6 +74,21 @@ def createLogs(password,host,valid,where):
                 file.write('⚠️ Panel login, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
             elif valid:
                 file.write('✅ Panel login, '+'host: '+host+', time: '+time+"\n")
+        elif where == 'publish':
+            if valid == False:
+                file.write('⚠️ Post publish, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
+            elif valid:
+                file.write('✅ Post publish, '+'host: '+host+', time: '+time+"\n")
+        elif where == 'edit':
+            if valid == False:
+                file.write('⚠️ Post edit, '+'host: '+host+', pass: '+password+', time: '+time+"\n")
+            elif valid:
+                file.write('✅ Post edit '+str(fname)+'.json, host: '+host+', time: '+time+"\n")
+        elif where == 'delete':
+            if valid == False:
+                file.write('⚠️ Post delete '+str(fname)+'.json, host: '+host+', pass: '+password+', time: '+time+"\n")
+            elif valid:
+                file.write('✅ Post delete '+str(fname)+'.json, host: '+host+', time: '+time+"\n")  
 
 app = Flask(__name__)
 
@@ -94,11 +109,11 @@ def submit():
     password_input = request.form['password_input']
     hash = hashlib.sha256(password_input.encode('utf8')).hexdigest()
     if hash == str(getDB()):
-        createLogs(password_input,request.remote_addr,True,'panel')
+        createLogs(password_input,request.remote_addr,True,'panel',None)
         file = open('log')
-        return render_template('admin.html', number=countFiles()+1, number2=countFiles(), logs=file.readlines())
+        return render_template('admin.html', number=countFiles()+1, number2=countFiles(), logs=file.read())
     else:
-        createLogs(password_input,request.remote_addr,False,'panel')
+        createLogs(password_input,request.remote_addr,False,'panel',None)
         return redirect('/login?error=1', code=302)
    
 @app.route('/publish', methods=['POST']) 
@@ -111,10 +126,10 @@ def publish():
         date_input = request.form['date_input']
         content_input = request.form['content_input']
         saveJSON(title_input, description_input, date_input, content_input)
-        createLogs(password_confirm,request.remote_addr,True,'publish')
+        createLogs(password_confirm,request.remote_addr,True,'publish',None)
         return redirect('/post?blog='+str(countFiles()), code=302)
     else:
-        createLogs(password_confirm,request.remote_addr,False,'publish')
+        createLogs(password_confirm,request.remote_addr,False,'publish',None)
         return 'wrong pass'
 
 @app.route('/edit')
@@ -132,10 +147,10 @@ def editPost():
         content_input = request.form['content_input']
         file = request.form['getNum']
         editJSON(title_input, description_input, date_input, content_input, file)
-        createLogs(password_confirm,request.remote_addr,True,'edit')
+        createLogs(password_confirm,request.remote_addr,True,'edit',file)
         return redirect('/post?blog='+str(file), code=302)
     else:
-        createLogs(password_confirm,request.remote_addr,False,'edit')
+        createLogs(password_confirm,request.remote_addr,False,'edit',None)
         return 'wrong pass'
 
 @app.route('/delPost', methods=['POST'])
@@ -146,10 +161,10 @@ def delPost():
     hash = hashlib.sha256(passwdCheck.encode('utf8')).hexdigest()
     if hash == str(getDB()):
         deleteJSON(fileToDel)
-        createLogs(passwdCheck,request.remote_addr,True,'delete')
+        createLogs(passwdCheck,request.remote_addr,True,'delete',fileToDel)
         return jsonify({"success": True})
     else:
-        createLogs(passwdCheck,request.remote_addr,False,'delete')
+        createLogs(passwdCheck,request.remote_addr,False,'delete',fileToDel)
         return jsonify({"success": False})
 
 if __name__ == '__main__':
