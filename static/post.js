@@ -7,37 +7,23 @@ const dateElement = document.getElementById('date');
 const containsElement = document.getElementById('contains');
 
 if (blogValue) {
-    readJson(blogValue,1).then(name => {
-        titleElement.innerText = name;
-    });
-    readJson(blogValue,2).then(name => {
-        descriptionElement.innerText = name;
-    });
-    readJson(blogValue,3).then(name => {
-        dateElement.innerText = name;
-    });
-    readJson(blogValue,4).then(name => {
-        containsElement.innerHTML = marked.parse(name);
-    });
+    readJson(blogValue);
 }else {
-    console.log('no value')
+    console.log('no value');
 }
 
+function insertData(title, desc, date, contains){
+    titleElement.innerText = title;
+    descriptionElement.innerText = desc;
+    dateElement.innerText = date;
+    containsElement.innerHTML = marked.parse(contains);
+}
 
-function readJson(number, thingToGet) {
+function readJson(number) {
     return fetch('/static/posts/' + number + '.json')
         .then(response => response.json()) 
         .then(data => {
-            if (thingToGet == 1){
-                return data.name; 
-            }else if (thingToGet == 2){
-                return data.description
-            }else if (thingToGet == 3){
-                return data.date
-            }else if (thingToGet == 4){
-                return data.contains
-            }
-            
+            insertData(data.name, data.description, data.date, data.contains); 
         })
         .catch(error => {
             console.error('Error reading the JSON file:', error);
