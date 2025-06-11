@@ -1,16 +1,17 @@
 getNum = document.getElementById('isHidden').innerText;
 posts_list = parseFloat(getNum);
 
+async function loadPosts(){
+    for (let i=posts_list; i>0; i--) {
+        await fetch('/static/posts/' + i + '.json')
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data)
+                insertElement(i,data.name,data.description)
+            })
+}}
 
-for (let i=posts_list; i>0; i--) {
-    fetch('/static/posts/' + i + '.json')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            insertElement(i,data.name,data.description)
-        })
-}
-
+loadPosts()
 
 function insertElement(i,name,desc){
     //console.log(i);
