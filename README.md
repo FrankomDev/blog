@@ -6,4 +6,5 @@ I like simple look of writefreely and wanted to do something similar.
 
 **TODO:**
 - write installation tutorial  
-- whitelist based on domain
+- whitelist based on domain [almost done]
+- optimize loading

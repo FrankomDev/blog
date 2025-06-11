@@ -68,8 +68,8 @@ def deleteJSON(file):
         os.rename(postsPath+str(i)+'.json', postsPath+str(i-1)+'.json')
 
 def checkWl(ip):
-    for line in whitelist.whitelist:
-        print(line)
+    for line in whitelist.whitelistF():
+        #print(line)
         if line == str(ip):
             return True
             break
