@@ -103,7 +103,7 @@ def createLogs(password,host,valid,where,fname):
                     file.write('✅ Post delete '+str(fname)+'.json, host: '+host+', time: '+time+"\n")  
 
 def checkForRevProxy():
-    if request.headers.get('X-Forwarder-For'):
+    if request.headers.get('X-Forwarded-For'):
         return request.headers['X-Forwarded-For']
     else:
         return request.remote_addr

@@ -51,7 +51,11 @@
         <hr width="20%" style="height: 2px; background-color: white; border: none; opacity: 1; margin: auto;">
         <br>
         <div class="container" id="scroll2">
-        <textarea disabled cols="90" rows="30" class="bg-light font-monospace h5">{{logs}}</textarea>
+        <textarea disabled cols="90" rows="30" class="bg-light font-monospace h5" id="logs_textarea">{{logs}}</textarea>
+        <script>
+            textarea = document.getElementById('logs_textarea');
+            textarea.scrollTop = textarea.scrollHeight;
+        </script>
         </div>
     </div>
     <script src="{{ url_for('static', filename='posts.js') }}"></script>
