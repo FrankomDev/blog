@@ -102,6 +102,12 @@ def createLogs(password,host,valid,where,fname):
                 elif valid:
                     file.write('✅ Post delete '+str(fname)+'.json, host: '+host+', time: '+time+"\n")  
 
+def checkForRevProxy():
+    if request.headers.get('X-Forwarder-For'):
+        return request.headers['X-Forwarded-For']
+    else:
+        return request.remote_addr
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -121,11 +127,11 @@ def submit():
     password_input = request.form['password_input']
     hash = hashlib.sha256(password_input.encode('utf8')).hexdigest()
     if hash == str(getDB()):
-        createLogs(password_input,request.remote_addr,True,'panel',None)
+        createLogs(password_input,checkForRevProxy(),True,'panel',None)
         file = open('log')
         return render_template('admin.html', number=countFiles()+1, number2=countFiles(), logs=file.read())
     else:
-        createLogs(password_input,request.remote_addr,False,'panel',None)
+        createLogs(password_input,checkForRevProxy(),False,'panel',None)
         return redirect('/login?error=1', code=302)
    
 @app.route('/publish', methods=['POST']) 
@@ -138,10 +144,10 @@ def publish():
         date_input = request.form['date_input']
         content_input = request.form['content_input']
         saveJSON(title_input, description_input, date_input, content_input)
-        createLogs(password_confirm,request.remote_addr,True,'publish',None)
+        createLogs(password_confirm,checkForRevProxy(),True,'publish',None)
         return redirect('/post?blog='+str(countFiles()), code=302)
     else:
-        createLogs(password_confirm,request.remote_addr,False,'publish',None)
+        createLogs(password_confirm,checkForRevProxy(),False,'publish',None)
         return 'wrong pass'
 
 @app.route('/edit')
@@ -159,10 +165,10 @@ def editPost():
         content_input = request.form['content_input']
         file = request.form['getNum']
         editJSON(title_input, description_input, date_input, content_input, file)
-        createLogs(password_confirm,request.remote_addr,True,'edit',file)
+        createLogs(password_confirm,checkForRevProxy(),True,'edit',file)
         return redirect('/post?blog='+str(file), code=302)
     else:
-        createLogs(password_confirm,request.remote_addr,False,'edit',None)
+        createLogs(password_confirm,checkForRevProxy(),False,'edit',None)
         return 'wrong pass'
 
 @app.route('/delPost', methods=['POST'])
@@ -173,10 +179,10 @@ def delPost():
     hash = hashlib.sha256(passwdCheck.encode('utf8')).hexdigest()
     if hash == str(getDB()):
         deleteJSON(fileToDel)
-        createLogs(passwdCheck,request.remote_addr,True,'delete',fileToDel)
+        createLogs(passwdCheck,checkForRevProxy(),True,'delete',fileToDel)
         return jsonify({"success": True})
     else:
-        createLogs(passwdCheck,request.remote_addr,False,'delete',fileToDel)
+        createLogs(passwdCheck,checkForRevProxy(),False,'delete',fileToDel)
         return jsonify({"success": False})
 
 if __name__ == '__main__':
